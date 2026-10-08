@@ -1,22 +1,27 @@
 {
     "manifest_version": 3,
-    "name": "Focus Indicator",
-    "version": "2.1.5",
-    "description": "Adds a high-contrast outline around the element with keyboard focus",
-    "permissions": ["storage", "scripting", "tabs"],
+    "name": "Spatial Nav Marks",
+    "version": "1.0.0",
+    "description": "Marks the focused spatial-navigation element with a soft wave.",
+    "permissions": ["scripting", "tabs"],
     "host_permissions": ["<all_urls>"],
     "background": {
         "service_worker": "background.js"
     },
-    "action": {
-        "default_popup": "popup.html"
-    },
     "content_scripts": [
         {
             "matches": ["<all_urls>"],
-            "js": ["content.js", "chooseOutlineColor.js"],
+            "js": [
+                "lib/geometry.js",
+                "lib/styles.js",
+                "lib/shadow.js",
+                "lib/overlay.js",
+                "lib/runtime.js",
+                "content.js"
+            ],
             "all_frames": true,
-            "match_about_blank": true
+            "match_about_blank": true,
+            "run_at": "document_idle"
         }
     ],
     "icons": {
